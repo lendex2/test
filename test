@@ -48,7 +48,6 @@ createButton(MainTab, "Mauser 1908/34", {"Mauser 1908/34", 0})
 createButton(MainTab, "Molotov", {"Molotov", 0})
 createButton(MainTab, "Gás Mostarda", {"Gás mostarda", 0})
 createButton(MainTab, "Bandagem Grande", {"Bandagem grande", 0})
-createButton(MainTab, "Gás Mostarda", {"Gás mostarda", 0})
 
 -- Tab: Pistolas
 local PistolasTab = Window:CreateTab("Pistolas", nil)
