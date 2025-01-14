@@ -1,0 +1,97 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Puxar arma | Rio de Janeiro, 1943",
+   LoadingTitle = "Rio de Janeiro, 1943",
+   LoadingSubtitle = "by idont_cry",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil,
+      FileName = "Example Hub",
+   },
+})
+
+local function createButton(tab, name, args)
+   tab:CreateButton({
+      Name = name,
+      Callback = function()
+         game:GetService("ReplicatedStorage"):WaitForChild("CompraEvento"):FireServer(unpack(args))
+      end,
+   })
+end
+
+local function createTeamButton(tab, name, teamName)
+   tab:CreateButton({
+      Name = name,
+      Callback = function()
+         game:GetService("ReplicatedStorage").TeamChoosingEvent:FireServer(teamName)
+      end,
+   })
+end
+
+local function notify(title, content)
+   game.StarterGui:SetCore("SendNotification", {
+      Title = title,
+      Text = content,
+      Duration = 5,
+   })
+end
+
+-- Tab: Fuzis
+local MainTab = Window:CreateTab("Fuzil", nil)
+createButton(MainTab, "Hotchkiss M1922", {"Hotchkiss M1922", 0})
+createButton(MainTab, "MP28/34", {"MP28/34", 0})
+createButton(MainTab, "Madsen 1934", {"Madsen 1934", 0})
+createButton(MainTab, "INA M943", {"INA M943", 0})
+createButton(MainTab, "Itajubá M943", {"Itajubá M943", 0})
+createButton(MainTab, "Mauser 1908/34", {"Mauser 1908/34", 0})
+createButton(MainTab, "Molotov", {"Molotov", 0})
+createButton(MainTab, "Gás Mostarda", {"Gás mostarda", 0})
+createButton(MainTab, "Bandagem Grande", {"Bandagem grande", 0})
+createButton(MainTab, "Gás Mostarda", {"Gás mostarda", 0})
+
+-- Tab: Pistolas
+local PistolasTab = Window:CreateTab("Pistolas", nil)
+createButton(PistolasTab, "Colt M1911", {"Colt M1911", 0})
+createButton(PistolasTab, "Taurus 38101SO", {"Taurus 38101SO", 0})
+
+-- Tab: Mudar Team
+local TeamTab = Window:CreateTab("Mudar team", nil)
+createTeamButton(TeamTab, "Forças Armadas", "Forças Armadas")
+createTeamButton(TeamTab, "Poder Executivo", "Poder Executivo")
+createTeamButton(TeamTab, "Poder Legislativo", "Poder Legislativo")
+createTeamButton(TeamTab, "Força Pública", "Força Pública")
+createTeamButton(TeamTab, "Polícia Civil", "Polícia Civil")
+createTeamButton(TeamTab, "Padre", "Padre")
+
+-- Tab: Link do Jogo
+local LinkTab = Window:CreateTab("Link do jogo", nil)
+LinkTab:CreateButton({
+   Name = "Clique aqui para copiar",
+   Callback = function()
+      if setclipboard then
+         setclipboard("https://www.roblox.com/pt/games/113978946318971/Rio-de-Janeiro-1943")
+      end
+      notify("Copiado com sucesso", "Link do jogo foi enviado para seu CTRL+V")
+   end,
+})
+
+-- Toggle: Spammar Chamada
+local isSpamming = false
+LinkTab:CreateToggle({
+   Name = "Spammar chamada",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(Value)
+      isSpamming = Value
+   end,
+})
+
+task.spawn(function()
+   while true do
+      if isSpamming then
+         game:GetService("ReplicatedStorage").Modcall:FireServer("Make", "MADE BY  idon_cry")
+      end
+      task.wait(0.1)
+   end
+end)
